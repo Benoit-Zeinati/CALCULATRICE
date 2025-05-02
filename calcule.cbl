@@ -21,35 +21,7 @@
        PROCEDURE DIVISION.
        PARA-CALCUL.
        
-       DISPLAY ' '.
-       DISPLAY '              _________________________________'.
-       DISPLAY '              |                               |'.
-       DISPLAY '              |     THE COBOL CALCULATOR      |'.
-       DISPLAY '              |                               |'.
-       DISPLAY '              |-------------------------------|'.
-       DISPLAY '              |                000000000000.00|'.
-       DISPLAY '              |-------------------------------|'.
-       DISPLAY '              |       |       |       |       |'.
-       DISPLAY '              |       |   %   |   ^   |   /   |'.
-       DISPLAY '              |-------|-------|-------|-------|'.
-       DISPLAY '              |       |       |       |       |'.
-       DISPLAY '              |   7   |   8   |   9   |   *   |'.
-       DISPLAY '              |       |       |       |       |'.
-       DISPLAY '              |-------|-------|-------|-------|'.
-       DISPLAY '              |       |       |       |       |'.
-       DISPLAY '              |   4   |   5   |   6   |   -   |'.
-       DISPLAY '              |       |       |       |       |'.
-       DISPLAY '              |-------|-------|-------|-------|'.
-       DISPLAY '              |       |       |       |       |'.
-       DISPLAY '              |   1   |   2   |   3   |   +   |'.
-       DISPLAY '              |       |       |       |       |'.
-       DISPLAY '              |-------|-------|-------|-------|'.
-       DISPLAY '              |       |       |       |       |'.
-       DISPLAY '              |       |   0   |   .   |   =   |'.
-       DISPLAY '              |       |       |       |       |'.
-       DISPLAY '              |-------|-------|-------|-------|'.
-       DISPLAY '"^" stands for the power sign'.
-       DISPLAY ' '.
+       PERFORM PARA-DISP-RESULT.
 
        PERFORM UNTIL WS-CALC-RETRY = 'N' OR 'n'
          DISPLAY 'Enter first number (9 didgit max):'
@@ -66,9 +38,9 @@
             END-PERFORM
 
             IF WS-CALC-OPER = '=' THEN
-               DISPLAY ' '
-      *         DISPLAY WS-CALC-RESULT
-                DISPLAY WS-CALC-ZRES
+      *         DISPLAY ' '
+      *         DISPLAY WS-CALC-ZRES
+               PERFORM PARA-DISP-RESULT
             ELSE 
                   DISPLAY 'Enter next number (9 didgit max):'
                   ACCEPT WS-CALC-N2
@@ -106,7 +78,6 @@
 
          END-PERFORM
       *
-         DISPLAY ' '
          Display 'RETRY Y/N:'
          MOVE SPACE TO WS-CALC-RETRY
          PERFORM UNTIL WS-CALC-RETRY = 'Y' OR 'y' OR 'N' OR 'n'
@@ -125,4 +96,35 @@
        END-IF.
        PARA-POWER-END.
        EXIT.
+
+       PARA-DISP-RESULT.
+       DISPLAY '              _________________________________'.
+       DISPLAY '              |                               |'.
+       DISPLAY '              |     THE COBOL CALCULATOR      |'.
+       DISPLAY '              |                               |'.
+       DISPLAY '              |-------------------------------|'.
+       DISPLAY '              |                  ' WS-CALC-ZRES '|'.
+       DISPLAY '              |-------------------------------|'.
+       DISPLAY '              |       |       |       |       |'.
+       DISPLAY '              |       |   %   |   ^   |   /   |'.
+       DISPLAY '              |       |       |       |       |'.
+       DISPLAY '              |-------|-------|-------|-------|'.
+       DISPLAY '              |       |       |       |       |'.
+       DISPLAY '              |   7   |   8   |   9   |   *   |'.
+       DISPLAY '              |       |       |       |       |'.
+       DISPLAY '              |-------|-------|-------|-------|'.
+       DISPLAY '              |       |       |       |       |'.
+       DISPLAY '              |   4   |   5   |   6   |   -   |'.
+       DISPLAY '              |       |       |       |       |'.
+       DISPLAY '              |-------|-------|-------|-------|'.
+       DISPLAY '              |       |       |       |       |'.
+       DISPLAY '              |   1   |   2   |   3   |   +   |'.
+       DISPLAY '              |       |       |       |       |'.
+       DISPLAY '              |-------|-------|-------|-------|'.
+       DISPLAY '              |       |       |       |       |'.
+       DISPLAY '              |       |   0   |   .   |   =   |'.
+       DISPLAY '              |       |       |       |       |'.
+       DISPLAY '              |-------|-------|-------|-------|'.
+       DISPLAY '"^" stands for the power sign'.
+       DISPLAY ' '.
        
